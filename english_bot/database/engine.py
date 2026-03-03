@@ -19,3 +19,21 @@ async def get_or_create_user(user_id, username=None):
             session.add(user)
             await session.commit()
         return user
+
+async def add_to_personal_dict(user_id, word, translation):
+    async with SessionLocal() as session:
+        existing = await session.execute(
+            select(PersonalWord).where(
+                PersonalWord.user_id == user_id,
+                PersonalWord.word == word
+            )
+        )
+        if existing.scalar_one_or_none():
+            return
+        new_word = PersonalWord(
+            user_id=user_id,
+            word=word,
+            translation=translation
+        )
+        session.add(new_word)
+        await session.commit()

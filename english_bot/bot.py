@@ -5,6 +5,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from config import BOT_TOKEN
 from handlers import common, translator, quiz, daily, dictionary
 from database.engine import init_db
+from utils.scheduler import setup_scheduler
 
 async def main():
     logging.basicConfig(level=logging.INFO)
@@ -13,11 +14,11 @@ async def main():
     dp=Dispatcher(storage=MemoryStorage())
     dp.include_routers(
         common.router,
-        daily.router,
         quiz.router,
-        dictionary.router,
         translator.router
     )
+    scheduler = setup_scheduler(bot)
+    scheduler.start()
     try:
         await dp.start_polling(bot)
     finally:
