@@ -15,7 +15,9 @@ async def main():
     dp.include_routers(
         common.router,
         quiz.router,
-        translator.router
+        translator.router,
+        daily.router,
+        dictionary.router
     )
     scheduler = setup_scheduler(bot)
     scheduler.start()

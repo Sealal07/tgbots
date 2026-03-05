@@ -3,7 +3,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardBut
 def main_menu():
     kb = [
         [KeyboardButton(text='📝 Тесты'), KeyboardButton(text='📚 Мой словарь')],
-        [KeyboardButton(text='🔄 Переводчик'), KeyboardButton(text='� Идиома дня')],
+        [KeyboardButton(text='🔄 Переводчик'), KeyboardButton(text='💡 Идиома дня')],
         [KeyboardButton(text='📊 Мой прогресс')]
     ]
     return ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
